@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Connect 4 arbetsprov</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="https://unpkg.com/vue@next" defer></script>
+        <script src="app.js" defer></script>
+    </head>
+<body>
+    <header>
+        <h1>Connect 4</h1>
+    </header>
+    <div id="connect4">
+        <div class="turn-counter">
+            <div class="current-turn">
+                <span>It is {{currentPlayer}}'s turn</span>
+                <span>player 1 = red</span>
+                <span>player 2 = blue</span>
+                <span>turns taken: {{turnCounter}}</span><br />
+                <button @click="redoLastTurn()">Go back one step</button>
+                <button @click="restartGame()">Restart game</button>
+                <button @click="saveGame()">Save game</button>
+                <button @click="deleteSavedGame()">Delete saved game</button>
+            </div>
+        </div>
+        <div id="board" class="board">
+            <div :id="'column-' + colIndex" v-for="(column, colIndex) in gameBoard.columns" class="column" :key="'column' + colIndex">
+                
+                <div v-for="(circle, ciIndex) in gameBoard.circles" 
+                :id="'circle-' + colIndex + '-' + ciIndex"
+                class="circle notClicked" 
+                key="'circle' + cino" 
+                @click.stop="addToken(ciIndex, colIndex, currentColor, currentPlayer, turnCounter)">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
